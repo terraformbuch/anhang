@@ -1,0 +1,29 @@
+---
+name: linting
+
+"on":
+  - pull_request
+
+jobs:
+  linting:
+    name: "linting with: languagetool, markdownlint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      #- uses: reviewdog/action-languagetool@v1
+      #  with:
+      #    github_token: ${{ secrets.github_token }}
+      #    # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
+      #    reporter: github-pr-check
+      #    # Change reporter level if you need.
+      #    level: info
+      #    language: 'de-DE'
+      #    disabled_rules: 'EINHEIT_LEERZEICHEN,PFEILE'
+
+      - name: markdownlint
+        uses: reviewdog/action-markdownlint@v0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+
